@@ -52,6 +52,7 @@ const startListening = (window, intervals) => {
       if (!Object.keys(initalActive).length) {
         return;
       }
+      const pollFrequency = vscode.workspace.getConfiguration('background-terminal-notifier').get('pollFrequency') || 10;
       const id = setInterval(() => {
         activePids(pid, tty).then(pids => {
           for (const pid of Object.keys(initalActive)) {
@@ -68,7 +69,7 @@ const startListening = (window, intervals) => {
               clearInterval(id)
           }
         });
-      }, 1000);
+      }, pollFrequency * 1000);
       intervals.push(id);
     })
   );

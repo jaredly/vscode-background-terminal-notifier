@@ -2,7 +2,7 @@
 	"name": "background-terminal-notifier",
 	"displayName": "Background Terminal Notifier",
 	"description": "Shows a notification when a terminal command completes in the background",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"publisher": "jaredly",
 	"engines": {
 		"vscode": "^1.30.0"
@@ -13,6 +13,19 @@
 	"activationEvents": [
 		"*"
 	],
+	"contributes": {
+		"configuration": {
+			"title": "Background Terminal Notifier",
+			"properties": {
+				"background-terminal-notifier.pollFrequency": {
+					"default": 10,
+					"title": "Poll frequency",
+					"type": "number",
+					"description": "Check for command completion every [n] seconds."
+				}
+			}
+		}
+	},
 	"icon": "icon.png",
 	"repository": {
 		"type": "git",
