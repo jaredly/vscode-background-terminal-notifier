@@ -13,9 +13,10 @@
 	"activationEvents": [
 		"*"
 	],
+	"icon": "icon.png",
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "https://github.com/jaredly/vscode-background-terminal-notifier"
 	},
 	"main": "./index.js",
 	"scripts": {
