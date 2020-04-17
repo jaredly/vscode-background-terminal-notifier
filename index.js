@@ -34,11 +34,14 @@ const activePids = async (parentPid, tty) => {
 };
 
 const sendNotification = (window, command, start) => {
+  const notificationSounds = vscode.workspace.getConfiguration('background-terminal-notifier').get('notificationSounds') || false;
+
   notifier.notify({
     title: "A command completed!",
     message: command,
     timeout: 100,
-    closeLabel: 'Ok'
+    closeLabel: 'Ok',
+    sound: notificationSounds
   });
 };
 
