@@ -2,7 +2,7 @@
 	"name": "background-terminal-notifier",
 	"displayName": "Background Terminal Notifier",
 	"description": "Shows a notification when a terminal command completes in the background",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"publisher": "jaredly",
 	"engines": {
 		"vscode": "^1.30.0"
