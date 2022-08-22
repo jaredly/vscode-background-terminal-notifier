@@ -3,27 +3,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
-const child_process = require("child_process");
-const ps = require("ps-node");
+const psList = require("ps-list");
 const notifier = require("node-notifier");
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
-const activePids = (parentPid) => {
-  return new Promise((resolve, reject) => {
-    ps.lookup({ ppid: parentPid }, function (err, list) {
-      if (err) {
-        reject(err);
-      }
+const activePids = async (parentPid) => {
+  const allTasks = await psList();
+  const childTasks = allTasks.filter((x) => x.ppid === parentPid);
 
-      const map = {};
-      for (const item of list) {
-        map[item.pid] = { pid: item.pid, command: item.command };
-      }
+  const map = {};
+  for (const task of childTasks) {
+    map[task.pid] = {
+      pid: task.pid,
+      command: task.cmd, // The cmd property is not supported on Windows
+    };
+  }
 
-      resolve(map);
-    });
-  });
+  return map;
 };
 
 const sendNotification = (window, command) => {
@@ -34,7 +31,7 @@ const sendNotification = (window, command) => {
 
   notifier.notify({
     title: "A command completed!",
-    message: command,
+    message: command || "...", // can't be undefined or empty
     timeout: 100,
     closeLabel: "Ok",
     sound: notificationSounds,
