@@ -49,7 +49,12 @@ const startListening = (window, intervals) => {
   return Promise.all(
     window.terminals.map(async terminal => {
       const pid = await terminal.processId;
-      const [ttyout, ttyerr] = await exec(`ps -o tty ${pid}`);
+
+      if (pid === -1) {
+        return
+      }
+
+      const [ttyout, ttyerr] = await exec(`ps -o tty "${pid}"`);
       const tty = ttyout.split("\n")[1].trim();
       const initalActive = await activePids(pid, tty);
       if (!Object.keys(initalActive).length) {
