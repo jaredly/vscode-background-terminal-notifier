@@ -28,6 +28,12 @@
 					"title": "Notification Sounds",
 					"type": "boolean",
 					"description": "Toggle sound for terminal notifications."
+				},
+				"background-terminal-notifier.notificationTimeout": {
+					"default": 100,
+					"title": "Notification Timeout",
+					"type": "number",
+					"description": "How long to show the notification for, in milliseconds."
 				}
 			}
 		}

@@ -28,11 +28,15 @@ const sendNotification = (window, command) => {
     vscode.workspace
       .getConfiguration("background-terminal-notifier")
       .get("notificationSounds") || false;
+  const notificationTimeout = 
+    vscode.workspace
+      .getConfiguration('background-terminal-notifier')
+      .get('notificationTimeout') || 100;
 
   notifier.notify({
     title: "A command completed!",
     message: command || "...", // can't be undefined or empty
-    timeout: 100,
+    timeout: notificationTimeout,
     closeLabel: "Ok",
     sound: notificationSounds,
   });
